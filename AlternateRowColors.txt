@@ -1,0 +1,22 @@
+Sub AlternateRowColors()
+    Dim ws As Worksheet
+    Set ws = ActiveSheet
+
+    Dim currentRow As Long
+    Dim lastRow As Long
+    lastRow = ws.Cells(ws.Rows.Count, "B").End(xlUp).Row
+
+    Dim colorIndex As Integer
+    colorIndex = 1
+
+    For currentRow = 2 To lastRow
+        If ws.Cells(currentRow, 2).Value <> ws.Cells(currentRow - 1, 2).Value Then
+            colorIndex = 1 - colorIndex
+        End If
+        If colorIndex = 0 Then
+            ws.Rows(currentRow).Interior.Color = RGB(255, 255, 255) ' White
+        Else
+            ws.Rows(currentRow).Interior.Color = RGB(211, 211, 211) ' Light Gray
+        End If
+    Next currentRow
+End Sub
